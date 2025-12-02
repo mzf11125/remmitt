@@ -6,6 +6,8 @@ import { useAuthStore } from "@/store/auth-store"
 import { useWalletStore } from "@/store/wallet-store"
 import { useRecipientStore } from "@/store/recipient-store"
 import { xellarService } from "@/services/xellar-service"
+import { useXellarWallet } from "@/lib/hooks/useXellarWallet"
+import { getCurrentNetwork } from "@/lib/constants/networks"
 import { BottomNav } from "@/components/layout/bottom-nav"
 import { Header } from "@/components/layout/header"
 import { BalanceCard } from "@/components/dashboard/balance-card"
@@ -20,7 +22,9 @@ export default function DashboardPage() {
   const { user, isAuthenticated } = useAuthStore()
   const { totalUsdBalance, setBalances, transactions, setTransactions, isLoading, setLoading } = useWalletStore()
   const { recipients, selectRecipient } = useRecipientStore()
+  const { balance, transactions: xellarTxs, refresh } = useXellarWallet()
   const [exchangeRate, setExchangeRate] = useState(15800)
+  const network = getCurrentNetwork()
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -31,18 +35,18 @@ export default function DashboardPage() {
     const loadData = async () => {
       setLoading(true)
       try {
-        const balance = await xellarService.getBalance()
+        // Use real balance from Xellar hook
         setBalances([
           {
             token: "USDC",
             symbol: "USDC",
             amount: balance.usdc,
             usdValue: balance.usdValue,
-            network: "Polygon",
+            network: network.displayName, // "Base Sepolia" or "Base"
           },
         ])
 
-        // Load mock transactions
+        // Load mock transactions (will be replaced with real ones from xellarTxs later)
         setTransactions([
           {
             id: "txn_1",
@@ -74,18 +78,23 @@ export default function DashboardPage() {
           },
         ])
 
-        // Get current exchange rate
-        const quote = await xellarService.getQuote(100, "USD", "IDR")
-        setExchangeRate(quote.exchangeRate)
+        // Get current exchange rate from Xellar
+        try {
+          const quote = await xellarService.getQuote(100, "USDC", "IDR")
+          setExchangeRate(quote.exchangeRate)
+        } catch (error) {
+          console.error("Failed to fetch exchange rate:", error)
+          // Keep default rate on error
+        }
       } catch (error) {
-        console.error("[v0] Failed to load dashboard data:", error)
+        console.error("Failed to load dashboard data:", error)
       } finally {
         setLoading(false)
       }
     }
 
     loadData()
-  }, [isAuthenticated, router, setBalances, setTransactions, setLoading])
+  }, [isAuthenticated, router, setBalances, setTransactions, setLoading, balance.usdc, balance.usdValue, network.displayName])
 
   if (!isAuthenticated) {
     return null

@@ -11,7 +11,7 @@ import { Mail, ArrowRight, Shield } from "lucide-react"
 
 export function EmailLogin() {
   const router = useRouter()
-  const { setLoading, setOtpSent, login, isLoading, otpSent, otpEmail } = useAuthStore()
+  const { setLoading, setOtpSent, login, isLoading, otpSent, otpEmail, verificationToken } = useAuthStore()
 
   const [email, setEmail] = useState("")
   const [otp, setOtp] = useState("")
@@ -28,10 +28,10 @@ export function EmailLogin() {
 
     setLoading(true)
     try {
-      await xellarService.sendOTP(email)
-      setOtpSent(true, email)
-    } catch (err) {
-      setError("Failed to send OTP. Please try again.")
+      const response = await xellarService.sendOTP(email)
+      setOtpSent(true, email, response.verificationToken)
+    } catch (err: any) {
+      setError(err?.message || "Failed to send OTP. Please try again.")
     } finally {
       setLoading(false)
     }
@@ -46,9 +46,14 @@ export function EmailLogin() {
       return
     }
 
+    if (!verificationToken) {
+      setError("Verification session expired. Please request a new code.")
+      return
+    }
+
     setLoading(true)
     try {
-      const response = await xellarService.verifyOTP(otpEmail!, otp)
+      const response = await xellarService.verifyOTP(otpEmail!, otp, verificationToken)
 
       login(
         {
@@ -60,39 +65,44 @@ export function EmailLogin() {
           createdAt: new Date().toISOString(),
         },
         response.token,
+        response.refreshToken,
+        response.expiresIn,
       )
 
       router.push("/dashboard")
-    } catch (err) {
-      setError("Invalid OTP. Please try again.")
+    } catch (err: any) {
+      setError(err?.message || "Invalid OTP. Please try again.")
     } finally {
       setLoading(false)
     }
   }
 
   const handleGoogleLogin = async () => {
-    setLoading(true)
-    try {
-      const response = await xellarService.loginWithGoogle()
-
-      login(
-        {
-          id: response.userId,
-          email: "demo@remitt.app",
-          name: "Demo User",
-          walletAddress: response.walletAddress,
-          kycStatus: "verified",
-          createdAt: new Date().toISOString(),
-        },
-        response.token,
-      )
-
-      router.push("/dashboard")
-    } catch (err) {
-      setError("Failed to login with Google")
-    } finally {
-      setLoading(false)
-    }
+    setError("Google login is not yet implemented in this demo. Please use email login.")
+    // setLoading(true)
+    // try {
+    //   const response = await xellarService.loginWithGoogle(googleCredential, expiredDate)
+    //
+    //   login(
+    //     {
+    //       id: response.userId,
+    //       email: "demo@remitt.app",
+    //       name: "Demo User",
+    //       walletAddress: response.walletAddress,
+    //       kycStatus: "verified",
+    //       createdAt: new Date().toISOString(),
+    //     },
+    //     response.token,
+    //     response.refreshToken,
+    //     response.expiresIn,
+    //   )
+    //
+    //   router.push("/dashboard")
+    // } catch (err: any) {
+    //   setError(err?.message || "Failed to login with Google")
+    // } finally {
+    //   setLoading(false)
+    // }
   }
 
   if (otpSent) {
