@@ -1,4 +1,4 @@
-# RemittSafe
+# Remitt
 
 Your go-to remittance app for sending money to Indonesia with near-zero fees.
 
