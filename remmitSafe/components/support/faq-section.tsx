@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "Is my money safe with REMMIT?",
     answer:
-      "Yes, your funds are secured using industry-leading blockchain technology. We use MPC (Multi-Party Computation) wallets that are self-custodial, meaning only you have access to your funds. All transactions are processed on Polygon network with enterprise-grade security.",
+      "Yes, your funds are secured using industry-leading blockchain technology. We use MPC (Multi-Party Computation) wallets that are self-custodial, meaning only you have access to your funds. All transactions are processed on Base network with enterprise-grade security.",
   },
   {
     question: "What documents do I need to verify my identity?",
