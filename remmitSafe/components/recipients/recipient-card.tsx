@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useWalletStore } from "@/store/wallet-store"
-import { UserIcon } from "@/components/icons"
+import { UserIcon, MenuIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import type { Recipient } from "@/lib/types"
@@ -51,11 +51,7 @@ export function RecipientCard({ recipient }: RecipientCardProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="sm" className="px-2">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="6" r="2" />
-                <circle cx="12" cy="12" r="2" />
-                <circle cx="12" cy="18" r="2" />
-              </svg>
+              <MenuIcon className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

@@ -17,22 +17,22 @@ const statusConfig = {
     icon: ClockIcon,
     title: "Processing your transfer",
     description: "We're converting your funds and preparing the transfer.",
-    color: "text-yellow-500",
-    bgColor: "bg-yellow-500/10",
+    color: "text-[oklch(var(--status-pending))]",
+    bgColor: "bg-[oklch(var(--status-pending)/0.15)]",
   },
   confirming: {
     icon: ClockIcon,
     title: "Sending to recipient",
     description: "Your money is on its way to the recipient's bank.",
-    color: "text-cyan-500",
-    bgColor: "bg-cyan-500/10",
+    color: "text-[oklch(var(--status-confirming))]",
+    bgColor: "bg-[oklch(var(--status-confirming)/0.15)]",
   },
   completed: {
     icon: CheckCircleIcon,
     title: "Transfer complete!",
     description: "Your money has been delivered successfully.",
-    color: "text-green-500",
-    bgColor: "bg-green-500/10",
+    color: "text-[oklch(var(--status-completed))]",
+    bgColor: "bg-[oklch(var(--status-completed)/0.15)]",
   },
 }
 

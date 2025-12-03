@@ -45,7 +45,7 @@ export function GoogleLoginButton() {
       variant="outline"
       onClick={handleGoogleLogin}
       disabled={isLoading}
-      className="w-full bg-white text-gray-700 border-white/20 hover:bg-white/90 gap-3"
+      className="w-full bg-card text-card-foreground border-border hover:bg-muted gap-3"
     >
       <GoogleIcon className="w-5 h-5" />
       Continue with Google

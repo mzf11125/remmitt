@@ -29,19 +29,19 @@ export function ActivityTimeline({ transactions }: ActivityTimelineProps) {
     switch (status) {
       case "completed":
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-[oklch(var(--status-completed)/0.15)] text-[oklch(var(--status-completed))]">
             <CheckCircleIcon className="w-3 h-3" /> Completed
           </span>
         )
       case "confirming":
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-cyan-100 text-cyan-700">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-[oklch(var(--status-confirming)/0.15)] text-[oklch(var(--status-confirming))]">
             <ClockIcon className="w-3 h-3" /> Confirming
           </span>
         )
       case "pending":
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-[oklch(var(--status-pending)/0.15)] text-[oklch(var(--status-pending))]">
             <ClockIcon className="w-3 h-3" /> Pending
           </span>
         )
@@ -76,13 +76,13 @@ export function ActivityTimeline({ transactions }: ActivityTimelineProps) {
                   {/* Icon */}
                   <div
                     className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      tx.type === "send" ? "bg-orange-100" : "bg-green-100"
+                      tx.type === "send" ? "bg-[oklch(var(--brand-orange)/0.15)]" : "bg-[oklch(var(--brand-green)/0.15)]"
                     }`}
                   >
                     {tx.type === "send" ? (
-                      <SendIcon className="w-5 h-5 text-orange-500" />
+                      <SendIcon className="w-5 h-5 text-[oklch(var(--brand-orange))]" />
                     ) : (
-                      <ReceiveIcon className="w-5 h-5 text-green-500" />
+                      <ReceiveIcon className="w-5 h-5 text-[oklch(var(--brand-green))]" />
                     )}
                   </div>
 

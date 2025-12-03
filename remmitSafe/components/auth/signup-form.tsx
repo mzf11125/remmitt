@@ -58,16 +58,16 @@ export function SignupForm() {
     return (
       <div className="space-y-6">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2">Verify your email</h2>
-          <p className="text-white/60 text-sm">
+          <h2 className="text-2xl font-bold text-foreground mb-2">Verify your email</h2>
+          <p className="text-muted-foreground text-sm">
             Enter the 6-digit code sent to
             <br />
-            <span className="text-white">{formData?.email}</span>
+            <span className="text-foreground">{formData?.email}</span>
           </p>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="otp" className="text-white/80">
+          <Label htmlFor="otp" className="text-foreground">
             Verification Code
           </Label>
           <Input
@@ -78,7 +78,7 @@ export function SignupForm() {
             placeholder="000000"
             value={otp}
             onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 text-center text-2xl tracking-[0.5em]"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground text-center text-2xl tracking-[0.5em]"
           />
         </div>
 
@@ -90,7 +90,7 @@ export function SignupForm() {
           {isLoading ? "Creating your account..." : "Create Account"}
         </Button>
 
-        <p className="text-center text-xs text-white/40">
+        <p className="text-center text-xs text-muted-foreground">
           By signing up, your secure wallet will be automatically created
         </p>
       </div>
@@ -100,59 +100,59 @@ export function SignupForm() {
   return (
     <form onSubmit={form.handleSubmit(handleDetailsSubmit)} className="space-y-5">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Create your account</h2>
-        <p className="text-white/60 text-sm">Start sending money home in minutes</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Create your account</h2>
+        <p className="text-muted-foreground text-sm">Start sending money home in minutes</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="name" className="text-white/80">
+        <Label htmlFor="name" className="text-foreground">
           Full Name
         </Label>
         <div className="relative">
-          <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+          <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input
             id="name"
             type="text"
             placeholder="Enter your full name"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 pl-10"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground pl-10"
             {...form.register("name")}
           />
         </div>
-        {form.formState.errors.name && <p className="text-sm text-red-400">{form.formState.errors.name.message}</p>}
+        {form.formState.errors.name && <p className="text-sm text-destructive">{form.formState.errors.name.message}</p>}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-white/80">
+        <Label htmlFor="email" className="text-foreground">
           Email Address
         </Label>
         <div className="relative">
-          <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+          <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input
             id="email"
             type="email"
             placeholder="Enter your email"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 pl-10"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground pl-10"
             {...form.register("email")}
           />
         </div>
-        {form.formState.errors.email && <p className="text-sm text-red-400">{form.formState.errors.email.message}</p>}
+        {form.formState.errors.email && <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>}
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="phone" className="text-white/80">
+        <Label htmlFor="phone" className="text-foreground">
           Phone Number
         </Label>
         <div className="relative">
-          <PhoneIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+          <PhoneIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input
             id="phone"
             type="tel"
             placeholder="+65 9123 4567"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 pl-10"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground pl-10"
             {...form.register("phone")}
           />
         </div>
-        {form.formState.errors.phone && <p className="text-sm text-red-400">{form.formState.errors.phone.message}</p>}
+        {form.formState.errors.phone && <p className="text-sm text-destructive">{form.formState.errors.phone.message}</p>}
       </div>
 
       <div className="flex items-start gap-3">
@@ -160,9 +160,9 @@ export function SignupForm() {
           id="terms"
           checked={form.watch("acceptTerms")}
           onCheckedChange={(checked) => form.setValue("acceptTerms", checked as boolean)}
-          className="border-white/40 data-[state=checked]:bg-primary data-[state=checked]:border-primary mt-1"
+          className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary mt-1"
         />
-        <Label htmlFor="terms" className="text-sm text-white/60 leading-relaxed">
+        <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed">
           I agree to the{" "}
           <a href="/terms" className="text-primary hover:underline">
             Terms of Service
@@ -174,7 +174,7 @@ export function SignupForm() {
         </Label>
       </div>
       {form.formState.errors.acceptTerms && (
-        <p className="text-sm text-red-400">{form.formState.errors.acceptTerms.message}</p>
+        <p className="text-sm text-destructive">{form.formState.errors.acceptTerms.message}</p>
       )}
 
       <Button

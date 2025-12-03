@@ -12,10 +12,10 @@ export function ActivityChart() {
   const withdrawal = transactions.filter((t) => t.type === "withdrawal").length
 
   const data = [
-    { name: "Sent", value: sent || 40, color: "#22c55e" },
-    { name: "Request", value: received || 25, color: "#a78bfa" },
-    { name: "Add Money", value: addMoney || 20, color: "#facc15" },
-    { name: "Withdrawal", value: withdrawal || 15, color: "#f87171" },
+    { name: "Sent", value: sent || 40, color: "var(--chart-1)" },
+    { name: "Request", value: received || 25, color: "var(--chart-4)" },
+    { name: "Add Money", value: addMoney || 20, color: "var(--chart-2)" },
+    { name: "Withdrawal", value: withdrawal || 15, color: "var(--chart-3)" },
   ]
 
   return (

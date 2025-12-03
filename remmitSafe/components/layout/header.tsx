@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
-import { BellIcon, ChevronDownIcon } from "@/components/icons"
+import { BellIcon, ChevronDownIcon, MoonIcon, SunIcon } from "@/components/icons"
 import { useAuthStore } from "@/store/auth-store"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +26,7 @@ const navItems = [
 export function Header() {
   const pathname = usePathname()
   const { user, logout } = useAuthStore()
+  const { theme, setTheme } = useTheme()
 
   return (
     <header className="sticky top-0 z-50 w-full">
@@ -40,8 +43,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "px-6 py-3 text-sm font-medium transition-colors",
-                  isActive ? "bg-[#1a4a4a] text-white" : "text-white/70 hover:text-white",
+                  "px-6 py-3 text-sm font-medium transition-colors rounded-lg",
+                  isActive ? "bg-[var(--nav-active)] text-foreground" : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.label}
@@ -51,8 +54,19 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="text-foreground hover:bg-muted"
+          >
+            <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-white/70 hover:text-white">
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
               EN <ChevronDownIcon className="w-4 h-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -98,7 +112,7 @@ export function Header() {
               href={item.href}
               className={cn(
                 "flex-1 px-4 py-3 text-center text-sm font-medium whitespace-nowrap transition-colors",
-                isActive ? "bg-[#1a4a4a] text-white" : "text-white/70 hover:text-white",
+                isActive ? "bg-[var(--nav-active)] text-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
               {item.label}

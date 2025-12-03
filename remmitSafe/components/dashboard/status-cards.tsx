@@ -15,22 +15,22 @@ export function StatusCards() {
       label: "Pending",
       value: pending,
       icon: ClockIcon,
-      iconBg: "bg-yellow-400",
-      iconColor: "text-yellow-900",
+      iconBg: "bg-[oklch(var(--status-pending)/0.2)]",
+      iconColor: "text-[oklch(var(--status-pending))]",
     },
     {
       label: "Confirming",
       value: confirming,
       icon: ClockIcon,
-      iconBg: "bg-cyan-200",
-      iconColor: "text-cyan-700",
+      iconBg: "bg-[oklch(var(--status-confirming)/0.2)]",
+      iconColor: "text-[oklch(var(--status-confirming))]",
     },
     {
       label: "Completed",
       value: completed,
       icon: CheckCircleIcon,
-      iconBg: "bg-green-400",
-      iconColor: "text-green-900",
+      iconBg: "bg-[oklch(var(--status-completed)/0.2)]",
+      iconColor: "text-[oklch(var(--status-completed))]",
     },
   ]
 

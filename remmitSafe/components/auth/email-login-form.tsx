@@ -56,16 +56,16 @@ export function EmailLoginForm() {
     return (
       <form onSubmit={otpForm.handleSubmit(handleOTPSubmit)} className="space-y-6">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2">Enter verification code</h2>
-          <p className="text-white/60 text-sm">
+          <h2 className="text-2xl font-bold text-foreground mb-2">Enter verification code</h2>
+          <p className="text-muted-foreground text-sm">
             We sent a 6-digit code to
             <br />
-            <span className="text-white">{email}</span>
+            <span className="text-foreground">{email}</span>
           </p>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="otp" className="text-white/80">
+          <Label htmlFor="otp" className="text-foreground">
             Verification Code
           </Label>
           <Input
@@ -74,11 +74,11 @@ export function EmailLoginForm() {
             inputMode="numeric"
             maxLength={6}
             placeholder="000000"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 text-center text-2xl tracking-[0.5em]"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground text-center text-2xl tracking-[0.5em]"
             {...otpForm.register("otp")}
           />
           {otpForm.formState.errors.otp && (
-            <p className="text-sm text-red-400">{otpForm.formState.errors.otp.message}</p>
+            <p className="text-sm text-destructive">{otpForm.formState.errors.otp.message}</p>
           )}
         </div>
 
@@ -93,7 +93,7 @@ export function EmailLoginForm() {
         <button
           type="button"
           onClick={() => setStep("email")}
-          className="w-full text-sm text-white/60 hover:text-white"
+          className="w-full text-sm text-muted-foreground hover:text-foreground"
         >
           Use a different email
         </button>
@@ -104,26 +104,26 @@ export function EmailLoginForm() {
   return (
     <form onSubmit={emailForm.handleSubmit(handleEmailSubmit)} className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Welcome back</h2>
-        <p className="text-white/60 text-sm">Sign in to continue sending money home</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Welcome back</h2>
+        <p className="text-muted-foreground text-sm">Sign in to continue sending money home</p>
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="email" className="text-white/80">
+        <Label htmlFor="email" className="text-foreground">
           Email Address
         </Label>
         <div className="relative">
-          <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+          <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
           <Input
             id="email"
             type="email"
             placeholder="Enter your email"
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/40 pl-10"
+            className="bg-muted border-border text-foreground placeholder:text-muted-foreground pl-10"
             {...emailForm.register("email")}
           />
         </div>
         {emailForm.formState.errors.email && (
-          <p className="text-sm text-red-400">{emailForm.formState.errors.email.message}</p>
+          <p className="text-sm text-destructive">{emailForm.formState.errors.email.message}</p>
         )}
       </div>
 
